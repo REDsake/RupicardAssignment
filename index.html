@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Enter name and phone number</title>
+  </head>
+  <body>
+    <br>
+    <br>
+    <center>
+     <h1>Register Form</h1>
+     <form>
+      <input type="text" id="name" name="Name" placeholder="Name" required/><br>
+      <br>
+      <input type="text" id="email" placeholder="Email" required/><br>
+      <br>
+      <input type="number" id="phone" placeholder="Phone no." required/><br><br>
+      <input type="submit" value="submit" onclick="AddRow()" />
+     </form> <br>
+   </div>
+    </center>
+  <script>
+      function AddRow()
+    {
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+
+      // define regular expressions for phone number and email validation
+      var phoneRegex = /^\d{10}$/; // matches 10 digits
+      var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; // matches a valid email format
+
+      // check if the name, email and phone are not empty
+      if (name==""|| email==""|| phone=="") {
+        alert("Please fill all the fields.");
+        return false;
+      }
+      // check if the phone number matches the regex
+      else if (!phoneRegex.test(phone)) {
+        alert("Please enter a valid phone number.");
+        return false;
+      }
+      // check if the email matches the regex
+      else if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+      }
+      else {
+      google.script.run.AddRecord(name,email,phone);
+      document.write("<center><h1>You have successfully registered</h1></center>");
+      }
+    }
+  </script>
+</body>
+</html>
